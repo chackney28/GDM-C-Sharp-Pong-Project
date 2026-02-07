@@ -208,6 +208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 116730566}
   - component: {fileID: 116730565}
+  - component: {fileID: 116730569}
   - component: {fileID: 116730567}
   - component: {fileID: 116730568}
   m_Layer: 0
@@ -363,6 +364,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &116730569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116730564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf763644721f84409c952b04c9b04ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BottomBarrierCollision
 --- !u!1 &275586315
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503706953}
   - component: {fileID: 503706952}
+  - component: {fileID: 503706956}
   - component: {fileID: 503706954}
   - component: {fileID: 503706955}
   m_Layer: 0
@@ -970,6 +984,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &503706956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503706951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c111a4e81fc57e5499730584c1f95cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TopBarrierCollision
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766062544}
   - component: {fileID: 1766062543}
-  - component: {fileID: 1766062545}
+  - component: {fileID: 1766062548}
   - component: {fileID: 1766062546}
   - component: {fileID: 1766062547}
   m_Layer: 0
@@ -1736,19 +1762,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1766062545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766062542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe33381b0df7244fb4be81836f861de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PaddleMovement
-  inputType: RightPaddle
 --- !u!50 &1766062546
 Rigidbody2D:
   serializedVersion: 5
@@ -1822,6 +1835,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1766062548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766062542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68a341b95ced18c4fb4dc8c31c7ae2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RightPaddleMovement
+  inputType: RightPaddle
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

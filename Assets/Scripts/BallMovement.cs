@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    //Private attributes
+    //Private attributes, not currently used but are here will be used potentially used later
     private float movementX = 3f;
     private float movementY = 3f;  
 
@@ -22,6 +22,10 @@ public class BallMovement : MonoBehaviour
 
     }
 
+    //public void OnHit(Collision2D collision){
+        
+    //}
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -30,14 +34,18 @@ public class BallMovement : MonoBehaviour
         //do the movement accordingly
         //There is still a "bug" where the momentum slowly dies but that is something to consider when adding
         //interactions with the paddles proper
-        //It also does nothing when hitting the right and left barriers, which is intentional because that
-        //will be used for scoring later. 
         float velocityChangeX = rb.linearVelocity.x;
-        if (collision.gameObject.tag == "Right Paddle"){ velocityChangeX = -movementX; }
-        if (collision.gameObject.tag == "Left Paddle"){ velocityChangeX = movementX; }
         float velocityChangeY = rb.linearVelocity.y;
-        if (collision.gameObject.tag == "Top Barrier"){ velocityChangeY = -movementY; }
-        if (collision.gameObject.tag == "Bottom Barrier"){ velocityChangeY = movementY; }
+        if (velocityChangeX > 0 && velocityChangeX < 3){
+            velocityChangeX = 3;
+        } else if (velocityChangeX < 0 && velocityChangeX > -3){
+            velocityChangeX = -3;
+        }
+        //A way to get if an object has an OnHit method and then execute it (mostly just changing the Ball velocity)
+        ICollidable check = collision.gameObject.GetComponent<ICollidable>();
+        if (check != null){
+            (velocityChangeX, velocityChangeY) = check.OnHit(velocityChangeX, velocityChangeY);
+        }
 
         rb.linearVelocity = new Vector2(velocityChangeX, velocityChangeY);
         

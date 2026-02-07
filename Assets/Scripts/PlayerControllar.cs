@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-public class PlayerControllar : MonoBehaviour
+public abstract class PlayerControllar : MonoBehaviour
 {
     //Private Attribute setting
     //0 Because it can never move
@@ -12,7 +12,7 @@ public class PlayerControllar : MonoBehaviour
     private float verticalSpeed = 5f;
     //My way of making the two paddles have different inputs. They have an attribute that each paddle sets that
     //calls different control subsets.
-    [SerializeField] private string inputType = "LeftPaddle";
+    [SerializeField] protected internal string inputType = "LeftPaddle";
 
     void Start()
     {
