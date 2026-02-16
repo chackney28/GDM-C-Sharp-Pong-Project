@@ -1,7 +1,8 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
+using Unity.Netcode;
 
-public class BallMovement : MonoBehaviour
+public class BallMovement : NetworkBehaviour
 {
     //Private attributes, not currently used but are here will be used potentially used later
     private float movementX = 3f;
