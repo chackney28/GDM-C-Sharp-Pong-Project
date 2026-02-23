@@ -3,26 +3,45 @@ using UnityEngine;
 using Unity.Netcode;
 
 public class BallMovement : NetworkBehaviour
-{
-    //Private attributes, not currently used but are here will be used potentially used later
-    private float movementX = 3f;
-    private float movementY = 3f;  
+{ 
+
+    public NetworkVariable<bool> GameStarted = new NetworkVariable<bool>(false);
+    public bool setOff = false;
+    public GameObject clientMessage;
 
     //Sets the ball off in a random direction
     void Start()
     {
-        //Can't really be encapsulated because it needs to be placed into start
-        float randomVelocityA = Random.Range(-6.0f, 6.0f);
-        float randomVelocityB= Random.Range(-6.0f, 6.0f);
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = new Vector2(randomVelocityA, randomVelocityB);
+        
     }
 
-    void FixedUpdate()
+    void Update()
     {
-
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (!GameStarted.Value){
+            //Sets the velocity to 0 to make sure it doesn't move
+            rb.linearVelocity = new Vector2(0, 0);
+            setOff = false;
+            //Checks to see how many things are connected, looking to see if both the host and client is connected
+            if (NetworkManager.Singleton.ConnectedClientsList.Count > 1){
+                GameStarted.Value = true;
+                //Activates a message that tells the player they need someone else and won't continue without it
+                clientMessage.gameObject.SetActive(false);
+            }
+        } else {
+            //Sets ball off in a random direction
+            if (!setOff){
+                setOff = true;
+                //Can't really be encapsulated because it needs to be placed into start
+                float randomVelocityA = Random.Range(-6.0f, 6.0f);
+                float randomVelocityB= Random.Range(-6.0f, 6.0f);
+                rb.linearVelocity = new Vector2(randomVelocityA, randomVelocityB);
+                transform.position = new Vector3(0, 0, 0);
+            }
+        }
     }
 
+    
     //public void OnHit(Collision2D collision){
         
     //}
@@ -51,4 +70,6 @@ public class BallMovement : NetworkBehaviour
         rb.linearVelocity = new Vector2(velocityChangeX, velocityChangeY);
         
     }
+
+
 }

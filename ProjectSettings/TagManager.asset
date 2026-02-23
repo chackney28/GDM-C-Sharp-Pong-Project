@@ -8,6 +8,9 @@ TagManager:
   - Bottom Barrier
   - Left Paddle
   - Right Paddle
+  - Ball
+  - LeftGoal
+  - RightGoal
   layers:
   - Default
   - TransparentFX

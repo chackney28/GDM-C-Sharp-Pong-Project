@@ -19,11 +19,10 @@ public abstract class PlayerControllar : NetworkBehaviour
     //My way of making the two paddles have different inputs. They have an attribute that each paddle sets that
     //calls different control subsets.
     [SerializeField] protected internal string inputType = "LeftPaddle";
-    private bool initPosition = false;
 
     void Start()
     {
-        
+        transform.position = new Vector3(transform.position.x, 0, 0);
     }
 
     //A function(?) that smoothly allows the private attribute be changed or gotten very easily
@@ -32,16 +31,12 @@ public abstract class PlayerControllar : NetworkBehaviour
         set { verticalSpeed = value; }
     }
 
-    void Update(){
-
-    }
-
     void FixedUpdate()
     {
  
         //Gets the controls and whatnot for the movement
         float vertical = Input.GetAxis(inputType);
-    
+
         //Changes the position (entirely vertical) based on the input and various attributes
         if (inputType == "LeftPaddle"){
             //Checks to see if the person using it is the server/host or the client. This is used to help restrict
@@ -57,7 +52,7 @@ public abstract class PlayerControllar : NetworkBehaviour
             if (!IsServer) {
                 transform.position += new Vector3(horizontalSpeed, vertical * verticalSpeed * Time.deltaTime, 0);
                 //Custom method to set the y position
-                setClientYRight(transform.position.y);
+                setClientYRightServerRpc(transform.position.y);
             } else {
                 transform.position = new Vector3(transform.position.x, yPositionRight.Value, 0);
             }
@@ -67,8 +62,8 @@ public abstract class PlayerControllar : NetworkBehaviour
     //A method made to update the network variable while in the client, as that is not is allowed but was the only
     //thing back this implamentation
     //Depreciated method according to Unity but works!
-    [ServerRpc(RequireOwnership = false)]
-    public void setClientYRight(float value){
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void setClientYRightServerRpc(float value){
         yPositionRight.Value = value;
     }
 
